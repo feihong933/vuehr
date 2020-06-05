@@ -18,12 +18,13 @@
 
             <el-container>
                 <el-aside width="200px">
-                    <el-menu router>
-                        <el-submenu index="1" v-for="(item,index) in this.$router.options.routes" v-if="!item.hidden"
+<!--                    router为菜单点击事件，unique-opened为二级菜单展开-->
+                    <el-menu router unique-opened>
+                        <el-submenu :index="index+''" v-for="(item,index) in routes" v-if="!item.hidden"
                                     :key="index">
                             <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span>{{item.name}}</span>
+                                <i :class="item.iconCls" style="color: #B3C0D1;margin-right: 8px"></i>
+                                <span style="">{{item.name}}</span>
                             </template>
                             <el-menu-item :index="child.path" v-for="(child,indexj) in item.children" :key="indexj">
                                 {{child.name}}
@@ -33,6 +34,11 @@
                     </el-menu>
                 </el-aside>
                 <el-main>
+                    <!--面包屑-->
+                    <el-breadcrumb separator-class="el-icon-arrow-right">
+                        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+                    </el-breadcrumb>
                     <router-view/>
                 </el-main>
             </el-container>
@@ -49,6 +55,12 @@
                 user: JSON.parse(window.sessionStorage.getItem("user"))
             }
         },
+        computed: {
+            //获取存储在store里的菜单数据
+            routes(){
+                return this.$store.state.routes;
+            }
+        },
         methods: {
             commandHandler(cmd) {
                 if (cmd == "logout") {
@@ -59,6 +71,7 @@
                     }).then(() => {
                         this.getRequest("/logout")
                         window.sessionStorage.removeItem("user")//注销成功删除用户信息
+                        this.$store.commit('initRoutes',[]);
                         this.$router.replace("/")// 页面跳转：push和replace
                     }).catch(() => {
                         this.$message({
@@ -98,16 +111,16 @@
     }
 
     .el-dropdown-link img {
-        width: 40px;
-        height: 40px;
-        border-radius: 40px;
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
         margin-right: 8px;
     }
 
     .el-dropdown-link {
         /*color: dodgerblue;*/
         font-weight: 500;
-        font-size: 20px;
+        font-size: 18px;
         /*font-family: "微软雅黑 Light";*/
         display: flex;
         align-items: center;
