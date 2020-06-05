@@ -1,19 +1,9 @@
 # vuehr
 
-## Project setup
-```
-npm install
-```
+菜单项数据加载成功之后，在前端有几个可以存放的地方：
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. sessionStorage
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2. localStorage
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+ **3. vuex**：状态管理工具，实现vue文件之间的数据共享
