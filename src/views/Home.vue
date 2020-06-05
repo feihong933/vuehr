@@ -23,11 +23,11 @@
                         <el-submenu :index="index+''" v-for="(item,index) in routes" v-if="!item.hidden"
                                     :key="index">
                             <template slot="title">
-                                <i :class="item.iconCls" style="color: #B3C0D1;margin-right: 8px"></i>
+                                <i :class="item.iconCls" style="color: #B3C0D1;margin:0 10px 0 20px;"></i>
                                 <span style="">{{item.name}}</span>
                             </template>
                             <el-menu-item :index="child.path" v-for="(child,indexj) in item.children" :key="indexj">
-                                {{child.name}}
+                                <span style="margin-left: 25px">{{child.name}}</span>
                             </el-menu-item>
                         </el-submenu>
 
@@ -35,10 +35,14 @@
                 </el-aside>
                 <el-main>
                     <!--面包屑-->
-                    <el-breadcrumb separator-class="el-icon-arrow-right">
-                        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+                    <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.path!=='/home'">
+                        <el-breadcrumb-item :to="{ path: '/home'}" >首页</el-breadcrumb-item>
+<!--                        <el-breadcrumb-item>{{this.$router.currentRoute.path}}</el-breadcrumb-item>-->
                         <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
                     </el-breadcrumb>
+                    <div class="welcome" v-if="this.$router.currentRoute.path=='/home'">
+                        欢迎来到微人事管理系统
+                    </div>
                     <router-view/>
                 </el-main>
             </el-container>
@@ -89,6 +93,13 @@
 </script>
 
 <style>
+    .welcome{
+        text-align: center;
+        font-size: 30px;
+        font-family: 华文行楷;
+        color: #333333;
+        padding-top: 50px;
+    }
     .homeHeader {
         background-color: #B3C0D1;
         color: #333;
