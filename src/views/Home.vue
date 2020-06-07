@@ -43,7 +43,7 @@
                     <div class="welcome" v-if="this.$router.currentRoute.path=='/home'">
                         欢迎来到微人事管理系统
                     </div>
-                    <router-view/>
+                    <router-view class="home-router-view"/>
                 </el-main>
             </el-container>
 
@@ -93,6 +93,11 @@
 </script>
 
 <style>
+
+    .home-router-view{
+        margin-top: 15px;
+    }
+
     .welcome{
         text-align: center;
         font-size: 30px;
