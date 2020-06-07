@@ -14,8 +14,7 @@ axios.interceptors.response.use(success => {
             Message.success({message:success.data.msg})
         }
         return success.data;
-    },
-    error => {
+    }, error => {
         if (error.response.status == 504 || error.response.data == 404) {
             Message.error({message: "服务器被吃了o(╯□╰)o"})
         } else if (error.response.status == 403) {
