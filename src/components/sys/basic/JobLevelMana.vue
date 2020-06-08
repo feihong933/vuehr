@@ -116,7 +116,7 @@
                                 active-color="#13ce66"
                                 inactive-color="#ff4949"
                                 active-text="启用"
-                                inactive-text="未启用">
+                                inactive-text="禁用">
                         </el-switch></td>
                     </tr>
                 </table>

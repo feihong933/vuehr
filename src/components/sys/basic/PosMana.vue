@@ -42,6 +42,15 @@
                         width="220"
                         label="创建时间">
                 </el-table-column>
+                <el-table-column
+                        width="100"
+                        align="center"
+                        label="是否启用">
+                    <template slot-scope="scope">
+                        <el-tag type="success" v-if="scope.row.enabled">已启用</el-tag>
+                        <el-tag type="danger" v-else>未启用</el-tag>
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" align="center" width="180">
                     <template slot-scope="scope">
                         <el-button
@@ -66,10 +75,25 @@
                 title="修改职位"
                 :visible.sync="dialogVisible"
                 width="30%">
-            <div>
-                <el-tag>将职位名称修改为</el-tag>
-                <el-input class="updatePosInput" size="small" v-model="updatePos.name"></el-input>
-            </div>
+            <table>
+                <tr>
+                    <td><el-tag>职位名称</el-tag></td>
+                    <td><el-input class="updatePosInput" size="small" v-model="updatePos.name"></el-input></td>
+                </tr>
+                <tr>
+                    <td><el-tag>是否启用</el-tag></td>
+                    <td><el-switch
+                            align="center"
+                            style="display: block"
+                            v-model="updatePos.enabled"
+                            active-color="#13ce66"
+                            inactive-color="#ff4949"
+                            active-text="启用"
+                            inactive-text="禁用">
+                    </el-switch></td>
+                </tr>
+            </table>
+
             <span slot="footer" class="dialog-footer">
     <el-button size="small" @click="dialogVisible = false">取 消</el-button>
     <el-button size="small" type="primary" @click="doUpdate" >确 定</el-button>
@@ -89,7 +113,8 @@
                 positions: [],
                 dialogVisible:false,
                 updatePos:{
-                    name:''
+                    name:'',
+                    enabled:false
                 },
                 multipleSelection:[]
             }
