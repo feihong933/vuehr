@@ -27,7 +27,7 @@ Vue.use(ElementUI)
 // 全局前置守卫>>>>>相当于过滤器
 //当一个导航触发时，全局前置守卫按照创建顺序调用。守卫是异步解析执行，此时导航在所有守卫 resolve 完之前一直处于 等待中。
 router.beforeEach((to, from, next) => {
-    if (to.path == '/') {
+    if (to.path === '/') {
         next();
     } else {
         //不是登录页，判断用户是否登录
@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
             initMenu(router, store);//>>>>用户在刷新页面时，不会重新刷新菜单数据
             next();
         } else {
-            // Message.error("Oops，没有登录！");
+            Message.error("Oops，没有登录！");
             next("/?redirect="+to.path);//登录后跳转到之前要访问的页面
         }
 

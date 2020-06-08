@@ -45,7 +45,7 @@
                                 window.sessionStorage.setItem("user",JSON.stringify(resp.obj))//将登陆用户信息存到sessionStorage
                                 ////登录后跳转到之前要访问的页面
                                 let path=this.$route.query.redirect;
-                                this.$router.replace((path=="/"||path==undefined)?"/home":path)// 页面跳转：push和replace
+                                this.$router.replace((path==="/"||path===undefined)?"/home":path)// 页面跳转：push和replace
                             }
                         })
                         // alert('submit!');
