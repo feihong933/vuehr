@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import ElementUI, {Message} from 'element-ui'
+import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import {initMenu} from "./utils/menus";
 //引入图标样式
@@ -35,8 +35,9 @@ router.beforeEach((to, from, next) => {
             initMenu(router, store);//>>>>用户在刷新页面时，不会重新刷新菜单数据
             next();
         } else {
-            Message.error("Oops，没有登录！");
-            next("/?redirect="+to.path);//登录后跳转到之前要访问的页面
+            // Message.error("Oops，没有登录！");
+            // next('/');
+            next('/?redirect='+to.path);//登录后跳转到之前要访问的页面
         }
 
     }
