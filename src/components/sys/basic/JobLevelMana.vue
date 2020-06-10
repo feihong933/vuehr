@@ -137,6 +137,7 @@
         },
         data() {
             return {
+                loading: false,
                 jl: {
                     name: '',
                     titleLevel:''
@@ -161,7 +162,9 @@
         methods:{
             //初始化职称数据
             initJls() {
+                this.loading = true;
                 this.getRequest("/system/basic/joblevel/").then(resp => {
+                    this.loading = false;
                     if (resp) {
                         this.jls = resp;
                     }
