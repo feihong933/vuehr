@@ -1,6 +1,10 @@
 <template>
     <div>
-        <el-form ref="loginForm" :rules="rules" :model="loginForm" class="loginContainer" @keydown.enter.native="loginSubmit">
+        <el-form
+                v-loading="loading"
+                element-loading-text="正在登录..."
+                element-loading-spinner="el-icon-loading"
+                ref="loginForm" :rules="rules" :model="loginForm" class="loginContainer" @keydown.enter.native="loginSubmit">
             <h2 class="loginTitle">系统登录</h2>
             <el-form-item prop="username">
                 <el-input type="text" v-model="loginForm.username" auto-complete="off"
@@ -23,6 +27,7 @@
         name: "Login",
         data() {
             return {
+                loading:false,
                 loginForm: {
                     username: 'admin',
                     password: '123'
@@ -36,9 +41,12 @@
         },
         methods: {
             loginSubmit() {
+
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
+                        this.loading=true;
                         this.postKeyValueRequest("/doLogin",this.loginForm).then(resp=>{
+                            this.loading=false;
                             if(resp){//若返回的response有值，说明登录成功
                                 // 见api.js中axios.interceptors.response.use(success => {}
                                 // alert(JSON.stringify(resp))
