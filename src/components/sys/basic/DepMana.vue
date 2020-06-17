@@ -99,7 +99,7 @@
                     if (d.id == dep.parentId) {
                         d.children = d.children.concat(dep);
                         if (d.children.length > 0) {
-                            d.parent = true;
+                            d.isParent = true;
                         }
                         return;
                     } else {
@@ -129,7 +129,7 @@
                     if (d.id == id) {
                         deps.splice(i, 1);
                         if (deps.length == 0) {
-                            p.parent = false;
+                            p.isParent = false;
                         }
                         return;
                     }else{
