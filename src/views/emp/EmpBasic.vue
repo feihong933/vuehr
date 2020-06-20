@@ -565,7 +565,6 @@
                     endContract: [{required: true, message: '请输入合同结束日期', trigger: 'blur'}],
                     workAge: [{required: true, message: '请输入工龄', trigger: 'blur'}],
                 }
-
             }
         },
         mounted() {
